@@ -65,6 +65,13 @@
           </button>
         </div>
 
+        <!-- 予約ボタン -->
+        <div id="nagamine-reserve-bar">
+          <a href="https://reservation.stransa.co.jp/a79fe9cbbcf6b945e38ea3d6b7e8d6cb" target="_blank" rel="noopener noreferrer" id="nagamine-reserve-btn">
+            📅 WEB予約はこちら（24時間対応）
+          </a>
+        </div>
+
         <!-- フッター -->
         <div id="nagamine-chat-footer">
           ながみね歯科クリニック ｜ TEL: 06-4869-4618
@@ -219,13 +226,13 @@
           try {
             const data = JSON.parse(line.slice(6));
             if (data.error) {
-              bubbleEl.textContent = data.error;
+              bubbleEl.innerHTML = escapeHtml(data.error);
               break;
             }
             if (data.done) break;
             if (data.text) {
               fullText += data.text;
-              bubbleEl.textContent = fullText;
+              bubbleEl.innerHTML = escapeHtml(fullText);
               scrollToBottom();
             }
           } catch (e) {
@@ -257,12 +264,17 @@
   }
 
   function escapeHtml(text) {
-    return text
+    const escaped = text
       .replace(/&/g, "&amp;")
       .replace(/</g, "&lt;")
       .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/\n/g, "<br>");
+      .replace(/"/g, "&quot;");
+    // URLをクリック可能なリンクに変換
+    const linked = escaped.replace(
+      /(https?:\/\/[^\s<]+)/g,
+      '<a href="$1" target="_blank" rel="noopener noreferrer" style="color:#1a73e8;text-decoration:underline;">$1</a>'
+    );
+    return linked.replace(/\n/g, "<br>");
   }
 
   function autoResize(el) {

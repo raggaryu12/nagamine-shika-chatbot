@@ -353,6 +353,32 @@
   transform: translateX(1px);
 }
 
+/* WEB予約バー */
+#nagamine-reserve-bar {
+  background: #f0f8ff;
+  border-top: 1px solid #d0e8f5;
+  padding: 8px 12px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+#nagamine-reserve-btn {
+  display: inline-block;
+  background: linear-gradient(135deg, #27ae60, #1e8449);
+  color: white;
+  text-decoration: none;
+  padding: 7px 16px;
+  border-radius: 20px;
+  font-size: 12.5px;
+  font-weight: bold;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+#nagamine-reserve-btn:hover {
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+
 /* フッター */
 #nagamine-chat-footer {
   text-align: center;
