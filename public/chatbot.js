@@ -80,9 +80,15 @@
 
       <!-- チャットボタン -->
       <button id="nagamine-chat-btn" aria-label="チャットを開く">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+        <svg width="28" height="28" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="17" cy="13" r="8" fill="white" fill-opacity="0.2" stroke="white" stroke-width="2"/>
+          <text x="17" y="17.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold" font-family="Arial">AI</text>
+          <path d="M13 21 Q13 25 17 25 Q21 25 21 21" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="27" cy="6" r="1.5" fill="white"/>
+          <circle cx="25" cy="3" r="1" fill="white" fill-opacity="0.6"/>
+          <circle cx="29" cy="9" r="1" fill="white" fill-opacity="0.6"/>
         </svg>
+        <span id="nagamine-chat-btn-label">AIアシスタント</span>
         <div id="nagamine-chat-badge"></div>
       </button>
     `;
@@ -297,9 +303,15 @@
         chatWindow.classList.remove("open");
         chatBtn.setAttribute("aria-label", "チャットを開く");
         chatBtn.innerHTML = `
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+          <svg width="28" height="28" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="17" cy="13" r="8" fill="white" fill-opacity="0.2" stroke="white" stroke-width="2"/>
+            <text x="17" y="17.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold" font-family="Arial">AI</text>
+            <path d="M13 21 Q13 25 17 25 Q21 25 21 21" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+            <circle cx="27" cy="6" r="1.5" fill="white"/>
+            <circle cx="25" cy="3" r="1" fill="white" fill-opacity="0.6"/>
+            <circle cx="29" cy="9" r="1" fill="white" fill-opacity="0.6"/>
           </svg>
+          <span id="nagamine-chat-btn-label">AIアシスタント</span>
           <div id="nagamine-chat-badge"></div>
         `;
       } else {
@@ -322,9 +334,15 @@
       chatWindow.classList.remove("open");
       chatBtn.setAttribute("aria-label", "チャットを開く");
       chatBtn.innerHTML = `
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+        <svg width="28" height="28" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="17" cy="13" r="8" fill="white" fill-opacity="0.2" stroke="white" stroke-width="2"/>
+          <text x="17" y="17.5" text-anchor="middle" fill="white" font-size="9" font-weight="bold" font-family="Arial">AI</text>
+          <path d="M13 21 Q13 25 17 25 Q21 25 21 21" stroke="white" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <circle cx="27" cy="6" r="1.5" fill="white"/>
+          <circle cx="25" cy="3" r="1" fill="white" fill-opacity="0.6"/>
+          <circle cx="29" cy="9" r="1" fill="white" fill-opacity="0.6"/>
         </svg>
+        <span id="nagamine-chat-btn-label">AIアシスタント</span>
         <div id="nagamine-chat-badge"></div>
       `;
     });
