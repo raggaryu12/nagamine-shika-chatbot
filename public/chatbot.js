@@ -1,18 +1,66 @@
 (function () {
   "use strict";
 
-  // チャットボット設定
-  const CONFIG = {
-    apiUrl: window.NAGAMINE_CHATBOT_API_URL || "http://localhost:3000/api/chat",
-    welcomeMessage:
-      "こんにちは！ながみね歯科クリニックのAIアシスタントです😊\n\nご予約・診療内容・アクセスなど、何でもお気軽にお聞きください。",
+  // APIのベースURL（server.js と同じオリジン、または外部指定）
+  const BASE_URL = (window.NAGAMINE_CHATBOT_API_URL || "http://localhost:3000/api/chat")
+    .replace("/api/chat", "");
+
+  // チャットボット設定（サーバーから取得、取得前はデフォルト値）
+  let CONFIG = {
+    apiUrl: BASE_URL + "/api/chat",
+    name: "AIアシスタント",
+    phone: "",
+    reservationUrl: "",
+    welcomeMessage: "こんにちは！AIアシスタントです😊\n\nご予約・診療内容・アクセスなど、何でもお気軽にお聞きください。",
     quickReplies: [
       "診療時間を教えてください",
       "予約はできますか？",
       "アクセス方法は？",
       "どんな治療がありますか？",
     ],
+    primaryColor: "#3b9ddd",
+    secondaryColor: "#1a6fb0",
   };
+
+  // サーバーからconfig取得して動的に反映
+  async function loadConfig() {
+    try {
+      const res = await fetch(BASE_URL + "/api/config");
+      if (!res.ok) return;
+      const data = await res.json();
+      CONFIG.name = data.name || CONFIG.name;
+      CONFIG.phone = data.phone || CONFIG.phone;
+      CONFIG.reservationUrl = data.reservationUrl || CONFIG.reservationUrl;
+      if (data.chatbot) {
+        const cb = data.chatbot;
+        CONFIG.welcomeMessage = (cb.welcomeMessage || CONFIG.welcomeMessage)
+          .replace("{name}", data.name || "");
+        CONFIG.quickReplies = cb.quickReplies || CONFIG.quickReplies;
+        CONFIG.primaryColor = cb.primaryColor || CONFIG.primaryColor;
+        CONFIG.secondaryColor = cb.secondaryColor || CONFIG.secondaryColor;
+        const footerText = (cb.footerText || "")
+          .replace("{name}", data.name || "")
+          .replace("{phone}", data.phone || "");
+        if (footerText) {
+          const footer = document.getElementById("nagamine-chat-footer");
+          if (footer) footer.textContent = footerText;
+        }
+      }
+      // カラーをCSS変数に反映
+      const widget = document.getElementById("nagamine-chatbot-widget");
+      if (widget) {
+        widget.style.setProperty("--nc-primary", CONFIG.primaryColor);
+        widget.style.setProperty("--nc-secondary", CONFIG.secondaryColor);
+      }
+      // 予約ボタンのURLを更新
+      const reserveBtn = document.getElementById("nagamine-reserve-btn");
+      if (reserveBtn && CONFIG.reservationUrl) {
+        reserveBtn.href = CONFIG.reservationUrl;
+      }
+    } catch (e) {
+      // config取得失敗時はデフォルト値のまま継続
+    }
+  }
 
   // 会話履歴
   let conversationHistory = [];
@@ -369,9 +417,10 @@
   }
 
   // 初期化
-  function init() {
+  async function init() {
     createWidget();
     bindEvents();
+    await loadConfig();
     showWelcomeMessage();
   }
 

@@ -7,6 +7,9 @@
   z-index: 9999;
   font-family: "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
   font-size: 14px;
+  /* カラーはclinic.config.jsから自動設定されます */
+  --nc-primary: #3b9ddd;
+  --nc-secondary: #1a6fb0;
 }
 
 /* チャットボタン */
@@ -14,7 +17,7 @@
   width: 72px;
   height: 72px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #3b9ddd, #1a6fb0);
+  background: linear-gradient(135deg, var(--nc-primary), var(--nc-secondary));
   border: none;
   cursor: pointer;
   display: flex;
@@ -96,7 +99,7 @@
 
 /* ヘッダー */
 #nagamine-chat-header {
-  background: linear-gradient(135deg, #3b9ddd, #1a6fb0);
+  background: linear-gradient(135deg, var(--nc-primary), var(--nc-secondary));
   padding: 14px 16px;
   display: flex;
   align-items: center;
@@ -203,7 +206,7 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #3b9ddd, #1a6fb0);
+  background: linear-gradient(135deg, var(--nc-primary), var(--nc-secondary));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -233,7 +236,7 @@
 }
 
 .nagamine-msg.user .nagamine-msg-bubble {
-  background: linear-gradient(135deg, #3b9ddd, #1a6fb0);
+  background: linear-gradient(135deg, var(--nc-primary), var(--nc-secondary));
   color: white;
   border-bottom-right-radius: 4px;
 }
@@ -282,8 +285,8 @@
 
 .nagamine-quick-btn {
   background: white;
-  border: 1.5px solid #3b9ddd;
-  color: #1a6fb0;
+  border: 1.5px solid var(--nc-primary);
+  color: var(--nc-secondary);
   padding: 5px 12px;
   border-radius: 20px;
   font-size: 12px;
@@ -324,7 +327,7 @@
 }
 
 #nagamine-chat-input:focus {
-  border-color: #3b9ddd;
+  border-color: var(--nc-primary);
   background: white;
 }
 
@@ -336,7 +339,7 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #3b9ddd, #1a6fb0);
+  background: linear-gradient(135deg, var(--nc-primary), var(--nc-secondary));
   border: none;
   cursor: pointer;
   display: flex;
