@@ -1,9 +1,10 @@
 (function () {
   "use strict";
 
-  // APIのベースURL（server.js と同じオリジン、または外部指定）
-  const BASE_URL = (window.NAGAMINE_CHATBOT_API_URL || "http://localhost:3000/api/chat")
-    .replace("/api/chat", "");
+  // APIのベースURL（外部指定がなければ同一オリジンのサーバーを使用）
+  const BASE_URL = window.NAGAMINE_CHATBOT_API_URL
+    ? window.NAGAMINE_CHATBOT_API_URL.replace("/api/chat", "")
+    : window.location.origin;
 
   // チャットボット設定（サーバーから取得、取得前はデフォルト値）
   let CONFIG = {
@@ -31,6 +32,9 @@
       CONFIG.name = data.name || CONFIG.name;
       CONFIG.phone = data.phone || CONFIG.phone;
       CONFIG.reservationUrl = data.reservationUrl || CONFIG.reservationUrl;
+      // ヘッダータイトルを更新
+      const headerTitle = document.getElementById("nagamine-chat-header-title");
+      if (headerTitle && data.name) headerTitle.textContent = data.name;
       if (data.chatbot) {
         const cb = data.chatbot;
         CONFIG.welcomeMessage = (cb.welcomeMessage || CONFIG.welcomeMessage)
@@ -81,7 +85,7 @@
             </svg>
           </div>
           <div id="nagamine-chat-header-info">
-            <div id="nagamine-chat-header-title">ながみね歯科クリニック</div>
+            <div id="nagamine-chat-header-title">AIアシスタント</div>
             <div id="nagamine-chat-header-sub">AIアシスタント ● 24時間対応</div>
           </div>
           <button id="nagamine-chat-close" aria-label="閉じる">
@@ -122,7 +126,7 @@
 
         <!-- フッター -->
         <div id="nagamine-chat-footer">
-          ながみね歯科クリニック ｜ TEL: 06-4869-4618
+          AIアシスタント
         </div>
       </div>
 
